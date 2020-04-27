@@ -1,5 +1,6 @@
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 /**
  * Class for smaller tic tac toe boards
@@ -29,7 +30,6 @@ public class SubBoard {
     }
 
     public boolean setSpace(int x, int y, char symbol) {
-        System.out.println("setting row " + y + " col " + x + " to " + symbol);
         if (getSpace(x, y) != ' ') {
             return false;
         } else {
@@ -101,8 +101,10 @@ public class SubBoard {
     }
 
     private void drawSpace(Graphics2D g, int size, int xStart, int yStart, int row, int col, char space){
-        int x = xStart + (int)(size * (row / 3.0));
-        int y = yStart + (int)(size * (col / 3.0));
+        int spaceLength = size / 3;
+        Rectangle2D fontRect = g.getFontMetrics().getStringBounds(String.valueOf(space), g);
+        int x = (int) (xStart + (row * spaceLength) + spaceLength/2 );
+        int y = (int) (xStart + (col * spaceLength) + spaceLength/2 );
         System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
         g.drawString(String.valueOf(space), x, y);
     }

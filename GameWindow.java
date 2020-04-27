@@ -20,6 +20,7 @@ public class GameWindow extends JPanel {
         paintUltimateLines(g2d);
         g2d.setColor(Color.BLUE);
         paintBoardLines(g2d, 20);
+        g2d.setFont(new Font("Helvetica", Font.BOLD, 48));
         board.draw(g2d, size);
     }
 
