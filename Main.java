@@ -22,6 +22,7 @@ public class Main {
         frame.setSize(new Dimension(SIZE, SIZE));
         frame.setTitle("Ultimate Tic Tac Toe");
         frame.setVisible(true);
+        window.addMouseListener(board);
         frame.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e) {
