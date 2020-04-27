@@ -11,7 +11,7 @@ public class GameWindow extends JPanel {
 
     public GameWindow(int size, Board board) {
         this.size = size;
-        this.boardDrawer = new BoardDrawer(board);
+        this.boardDrawer = new BoardDrawer(board, size);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class GameWindow extends JPanel {
         g2d.setColor(Color.BLUE);
         paintBoardLines(g2d, 20);
         g2d.setFont(new Font("Helvetica", Font.BOLD, 48));
-        board.draw(g2d, size);
+        boardDrawer.draw(g2d);
     }
 
     private void paintUltimateLines(Graphics2D g){

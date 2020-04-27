@@ -23,10 +23,7 @@ public class Board implements MouseInputListener{
     }
 
     public boolean play(int xOuter, int yOuter, int xInner, int yInner, char symbol) {
-        if (!spaces[yOuter][xOuter].setSpace(xInner, yInner, symbol)) {
-            return false;
-        }
-        return true;
+        return spaces[yOuter][xOuter].setSpace(xInner, yInner, symbol);
     }
 
     public char isWon() {
@@ -89,22 +86,6 @@ public class Board implements MouseInputListener{
             }
         }
         return won;
-    }
-
-    public void draw(Graphics2D g, int size){
-        g.setColor(Color.RED);
-        for(int row = 0; row < spaces.length; row++){
-            for(int col = 0; col < spaces[row].length; col++){
-                SubBoard subBoard = spaces[row][col];
-                drawSubBoard(g, size, row, col, subBoard);
-            }
-        }
-    }
-
-    private void drawSubBoard(Graphics2D g, int size, int row, int col, SubBoard subBoard){
-        int xStart = (int) (size * (row / 3.0));
-        int yStart = (int) (size * (col / 3.0));
-        subBoard.draw(g, size / 3, xStart, yStart);
     }
 
     @Override

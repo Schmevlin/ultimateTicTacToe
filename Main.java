@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Board board = new Board();
         board.play(1, 1, 1, 1, 'x');
+        board.play(1, 1, 1, 0, 'o');
         System.out.println("Space = " + board.spaces[1][1].getSpace(0, 0));
         createWindow(board);
 
