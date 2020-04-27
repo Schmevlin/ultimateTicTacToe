@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.MouseEvent;
+
+import javax.swing.event.MouseInputListener;
 
 /**
  * Class for outer "ultimate" board
@@ -6,11 +9,11 @@ import java.awt.*;
  * @version 4/27/20
  * @author Kevin Harris
  */
-public class Board{
+public class Board implements MouseInputListener {
     private SubBoard[][] spaces = new SubBoard[3][3];
     private char[][] wonBoards = new char[3][3];
 
-    public Board(){
+    public Board() {
         for (int y = 0; y < spaces.length; y++) {
             for (int x = 0; x < spaces[0].length; x++) {
                 spaces[y][x] = new SubBoard();
@@ -19,23 +22,23 @@ public class Board{
         }
     }
 
-    public boolean play(int xOuter, int yOuter, int xInner, int yInner, char symbol){
-        if(!spaces[yOuter][xOuter].setSpace(xInner, yInner, symbol)){
+    public boolean play(int xOuter, int yOuter, int xInner, int yInner, char symbol) {
+        if (!spaces[yOuter][xOuter].setSpace(xInner, yInner, symbol)) {
             return false;
         }
         return true;
     }
 
-    public char isWon(){
-        for(int y = 0; y < spaces.length; y++){
-            for(int x = 0; x < spaces[0].length; x++){
+    public char isWon() {
+        for (int y = 0; y < spaces.length; y++) {
+            for (int x = 0; x < spaces[0].length; x++) {
                 wonBoards[y][x] = spaces[y][x].isWon();
             }
         }
         return isWonButForChars();
     }
 
-    private char isWonButForChars(){ //totally not copied code
+    private char isWonButForChars() { // totally not copied code
         for (int y = 0; y < wonBoards.length; y++) {
             if (checkRow(y) != ' ') {
                 return checkRow(y);
@@ -46,17 +49,17 @@ public class Board{
                 return checkColumn(x);
             }
         }
-        if(wonBoards[0][0] == wonBoards[1][1] && wonBoards[1][1] == wonBoards[2][2]){
-            if(wonBoards[0][0] != ' '){
+        if (wonBoards[0][0] == wonBoards[1][1] && wonBoards[1][1] == wonBoards[2][2]) {
+            if (wonBoards[0][0] != ' ') {
                 return wonBoards[0][0];
             }
         }
-        if(wonBoards[2][0] == wonBoards[1][1] && wonBoards[1][1] == wonBoards[0][2]){
-            if(wonBoards[2][0] != ' '){
+        if (wonBoards[2][0] == wonBoards[1][1] && wonBoards[1][1] == wonBoards[0][2]) {
+            if (wonBoards[2][0] != ' ') {
                 return wonBoards[2][0];
             }
         }
-        
+
         return ' ';
     }
 
@@ -88,7 +91,32 @@ public class Board{
         return won;
     }
 
-    private void draw(Graphics2D g){
-        
+    private void draw(Graphics2D g) {
+
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("mouseX : " + e.getX());
+        System.out.println("mouseY : " + e.getY());
+        System.out.println();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseDragged(MouseEvent e) {}
+
+    @Override
+    public void mouseMoved(MouseEvent e) {}
 }
