@@ -1,3 +1,8 @@
+/**
+ * Class for smaller tic tac toe boards
+ * @version 4/27/20
+ * @author Kevin Harris
+ */
 public class SubBoard{
     private char[][] spaces;
     
@@ -7,5 +12,13 @@ public class SubBoard{
                 spaces[y][x] = ' ';
             }
         }
+    }
+    /**
+     * gets the value of one space of the board
+     * @param x x position of requested space
+     * @param y y position of requested space
+     */
+    public char getSpace(int x, int y){
+        return spaces[y][x];
     }
 }
