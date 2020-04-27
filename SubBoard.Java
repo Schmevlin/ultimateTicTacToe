@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Class for smaller tic tac toe boards
  * 
@@ -85,5 +87,13 @@ public class SubBoard {
             }
         }
         return won;
+    }
+
+    public void draw(Graphics2D g){
+        for(int row = 0; row < spaces.length; row++){
+            for(int col = 0; col < spaces[row].length; col++){
+                char space = spaces[row][col];
+            }
+        }
     }
 }

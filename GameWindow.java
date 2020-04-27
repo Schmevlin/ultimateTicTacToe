@@ -1,14 +1,17 @@
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.*;
 
-public class GameWindow extends JPanel {
+public class GameWindow extends JPanel implements ActionListener {
 
-    private static int ULTIMATE_LINE_SIZE = 50;
+    private static int ULTIMATE_LINE_SIZE = 10;
     private static int LINE_SIZE = 5;
     private int size;
+    private Board board;
 
-    public GameWindow(int size) {
+    public GameWindow(int size, Board board) {
         this.size = size;
+        this.board = board;
     }
 
     @Override
@@ -24,18 +27,19 @@ public class GameWindow extends JPanel {
     }
 
     private void paintBoardLines(Graphics2D g, int padding){
-        int lineOffset = (ULTIMATE_LINE_SIZE * 2 / 3);
-        int boardSize = (size / 3) - (2 * padding) - lineOffset;
+        int lineOffset = (ULTIMATE_LINE_SIZE * 1 / 3);
+        int boardSize = (size / 3) - (2 * padding) - lineOffset * 2;
         int oneThirdPosition = (size / 3) + lineOffset + padding;
         int twoThirdsPosition = (size * 2 / 3) + lineOffset + padding;
         paintBoard(g, padding, padding, boardSize, LINE_SIZE);
-        g.setColor(Color.RED);
         paintBoard(g, oneThirdPosition, padding,  boardSize, LINE_SIZE);
-        g.setColor(Color.BLUE);
         paintBoard(g, twoThirdsPosition, padding, boardSize, LINE_SIZE);
-    
-    
-
+        paintBoard(g, padding, oneThirdPosition, boardSize, LINE_SIZE);
+        paintBoard(g, oneThirdPosition, oneThirdPosition,  boardSize, LINE_SIZE);
+        paintBoard(g, twoThirdsPosition, oneThirdPosition, boardSize, LINE_SIZE);
+        paintBoard(g, padding, twoThirdsPosition, boardSize, LINE_SIZE);
+        paintBoard(g, oneThirdPosition, twoThirdsPosition,  boardSize, LINE_SIZE);
+        paintBoard(g, twoThirdsPosition, twoThirdsPosition, boardSize, LINE_SIZE);
     }
 
     private void paintBoard(Graphics2D g, int xStart, int yStart, int boardSize, int lineSize){
@@ -47,5 +51,10 @@ public class GameWindow extends JPanel {
         g.fillRect(xStart + twoThirdsPosition, yStart, lineSize, boardSize);
         g.fillRect(xStart, yStart + oneThirdPosition, boardSize, lineSize);
         g.fillRect(xStart, yStart + twoThirdsPosition, boardSize, lineSize);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
     }
 }

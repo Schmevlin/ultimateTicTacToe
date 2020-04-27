@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Class for outer "ultimate" board
  * 
@@ -84,5 +86,9 @@ public class Board{
             }
         }
         return won;
+    }
+
+    private void draw(Graphics2D g){
+        
     }
 }
