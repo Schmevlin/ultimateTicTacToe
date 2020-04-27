@@ -9,8 +9,13 @@ import javax.swing.event.MouseInputListener;
  * @version 4/27/20
  * @author Kevin Harris
  */
+<<<<<<< HEAD
 public class Board implements MouseInputListener {
     private SubBoard[][] spaces = new SubBoard[3][3];
+=======
+public class Board{
+    public SubBoard[][] spaces = new SubBoard[3][3];
+>>>>>>> 26a3b168eb3067d9de0cf17009ad27c99c5f7d19
     private char[][] wonBoards = new char[3][3];
 
     public Board() {
@@ -91,8 +96,25 @@ public class Board implements MouseInputListener {
         return won;
     }
 
+<<<<<<< HEAD
     private void draw(Graphics2D g) {
 
+=======
+    public void draw(Graphics2D g, int size){
+        g.setColor(Color.RED);
+        for(int row = 0; row < spaces.length; row++){
+            for(int col = 0; col < spaces[row].length; col++){
+                SubBoard subBoard = spaces[row][col];
+                drawSubBoard(g, size, row, col, subBoard);
+            }
+        }
+    }
+
+    private void drawSubBoard(Graphics2D g, int size, int row, int col, SubBoard subBoard){
+        int xStart = (int) (size * (row / 3.0));
+        int yStart = (int) (size * (col / 3.0));
+        subBoard.draw(g, size, xStart, yStart);
+>>>>>>> 26a3b168eb3067d9de0cf17009ad27c99c5f7d19
     }
 
     @Override
