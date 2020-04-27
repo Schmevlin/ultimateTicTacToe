@@ -7,11 +7,11 @@ public class GameWindow extends JPanel {
     private static int ULTIMATE_LINE_SIZE = 10;
     private static int LINE_SIZE = 5;
     private int size;
-    private Board board;
+    private BoardDrawer boardDrawer;
 
     public GameWindow(int size, Board board) {
         this.size = size;
-        this.board = board;
+        this.boardDrawer = new BoardDrawer(board);
     }
 
     @Override
