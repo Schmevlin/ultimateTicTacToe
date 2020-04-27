@@ -5,7 +5,7 @@
  * @author Kevin Harris
  */
 public class SubBoard {
-    private char[][] spaces;
+    private char[][] spaces = new char[3][3];
 
     public SubBoard() {
         for (int y = 0; y < spaces.length; y++) {
