@@ -103,8 +103,8 @@ public class SubBoard {
     private void drawSpace(Graphics2D g, int size, int xStart, int yStart, int row, int col, char space){
         int spaceLength = size / 3;
         Rectangle2D fontRect = g.getFontMetrics().getStringBounds(String.valueOf(space), g);
-        int x = (int) (xStart + (row * spaceLength) + spaceLength/2 );
-        int y = (int) (xStart + (col * spaceLength) + spaceLength/2 );
+        int x = (int) (xStart + (row * spaceLength) + spaceLength/2 - fontRect.getWidth()/2);
+        int y = (int) (xStart + (col * spaceLength) + spaceLength/2 + fontRect.getHeight()/2);
         System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
         g.drawString(String.valueOf(space), x, y);
     }

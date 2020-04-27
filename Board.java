@@ -104,7 +104,7 @@ public class Board implements MouseInputListener{
     private void drawSubBoard(Graphics2D g, int size, int row, int col, SubBoard subBoard){
         int xStart = (int) (size * (row / 3.0));
         int yStart = (int) (size * (col / 3.0));
-        subBoard.draw(g, size, xStart, yStart);
+        subBoard.draw(g, size / 3, xStart, yStart);
     }
 
     @Override
