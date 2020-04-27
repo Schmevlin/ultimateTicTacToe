@@ -1,3 +1,4 @@
+import javax.swing.JPanel;
 import java.awt.*;
 
 /**
@@ -7,12 +8,12 @@ import java.awt.*;
  * @author Kevin Harris
  */
 public class SubBoard {
-    private char[][] spaces = new char[3][3];
+    public char[][] spaces = new char[3][3];
 
     public SubBoard() {
         for (int y = 0; y < spaces.length; y++) {
             for (int x = 0; x < spaces[0].length; x++) {
-                setSpace(x, y, ' ');
+                spaces[y][x] = ' ';
             }
         }
     }
@@ -28,6 +29,7 @@ public class SubBoard {
     }
 
     public boolean setSpace(int x, int y, char symbol) {
+        System.out.println("setting row " + y + " col " + x + " to " + symbol);
         if (getSpace(x, y) != ' ') {
             return false;
         } else {
@@ -89,11 +91,19 @@ public class SubBoard {
         return won;
     }
 
-    public void draw(Graphics2D g){
+    public void draw(Graphics2D g, int size, int xStart, int yStart){
         for(int row = 0; row < spaces.length; row++){
             for(int col = 0; col < spaces[row].length; col++){
                 char space = spaces[row][col];
+                drawSpace(g, size, xStart, yStart, row, col, space);
             }
         }
+    }
+
+    private void drawSpace(Graphics2D g, int size, int xStart, int yStart, int row, int col, char space){
+        int x = xStart + (int)(size * (row / 3.0));
+        int y = yStart + (int)(size * (col / 3.0));
+        System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
+        g.drawString(String.valueOf(space), x, y);
     }
 }

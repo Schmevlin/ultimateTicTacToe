@@ -7,7 +7,7 @@ import java.awt.*;
  * @author Kevin Harris
  */
 public class Board{
-    private SubBoard[][] spaces = new SubBoard[3][3];
+    public SubBoard[][] spaces = new SubBoard[3][3];
     private char[][] wonBoards = new char[3][3];
 
     public Board(){
@@ -88,7 +88,19 @@ public class Board{
         return won;
     }
 
-    private void draw(Graphics2D g){
-        
+    public void draw(Graphics2D g, int size){
+        g.setColor(Color.RED);
+        for(int row = 0; row < spaces.length; row++){
+            for(int col = 0; col < spaces[row].length; col++){
+                SubBoard subBoard = spaces[row][col];
+                drawSubBoard(g, size, row, col, subBoard);
+            }
+        }
+    }
+
+    private void drawSubBoard(Graphics2D g, int size, int row, int col, SubBoard subBoard){
+        int xStart = (int) (size * (row / 3.0));
+        int yStart = (int) (size * (col / 3.0));
+        subBoard.draw(g, size, xStart, yStart);
     }
 }

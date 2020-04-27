@@ -1,8 +1,8 @@
 import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.event.*;
 
-public class GameWindow extends JPanel implements ActionListener {
+import java.awt.*;
+
+public class GameWindow extends JPanel {
 
     private static int ULTIMATE_LINE_SIZE = 10;
     private static int LINE_SIZE = 5;
@@ -20,6 +20,7 @@ public class GameWindow extends JPanel implements ActionListener {
         paintUltimateLines(g2d);
         g2d.setColor(Color.BLUE);
         paintBoardLines(g2d, 20);
+        board.draw(g2d, size);
     }
 
     private void paintUltimateLines(Graphics2D g){
@@ -51,10 +52,5 @@ public class GameWindow extends JPanel implements ActionListener {
         g.fillRect(xStart + twoThirdsPosition, yStart, lineSize, boardSize);
         g.fillRect(xStart, yStart + oneThirdPosition, boardSize, lineSize);
         g.fillRect(xStart, yStart + twoThirdsPosition, boardSize, lineSize);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
     }
 }
