@@ -1,16 +1,8 @@
 import javax.swing.JPanel;
-<<<<<<< HEAD
-import javax.swing.event.MouseInputListener;
-=======
->>>>>>> 26a3b168eb3067d9de0cf17009ad27c99c5f7d19
 
 import java.awt.*;
 
-<<<<<<< HEAD
-public class GameWindow extends JPanel{
-=======
 public class GameWindow extends JPanel {
->>>>>>> 26a3b168eb3067d9de0cf17009ad27c99c5f7d19
 
     private static int ULTIMATE_LINE_SIZE = 10;
     private static int LINE_SIZE = 5;
@@ -61,8 +53,4 @@ public class GameWindow extends JPanel {
         g.fillRect(xStart, yStart + oneThirdPosition, boardSize, lineSize);
         g.fillRect(xStart, yStart + twoThirdsPosition, boardSize, lineSize);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 26a3b168eb3067d9de0cf17009ad27c99c5f7d19
