@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class BoardDrawer {
     private static int LINE_WIDTH = 10;
@@ -23,12 +24,16 @@ public class BoardDrawer {
         }
     }
 
-    public void handleClick(int x, int y, char symbol) {
-        SubBoardDrawer handler = subBoardDrawers.stream()
-                .filter(d -> d.subBoard.isWon() == ' ' && d.canHandleClick(x, y))
-                .findFirst()
-                .get();
-        handler.handleClick(x, y, symbol);
+    public boolean handleClick(int x, int y, char symbol) {
+        Optional<SubBoardDrawer> handler = subBoardDrawers.stream()
+                .filter(d -> !d.subBoard.isWon().hasWinner() && d.canHandleClick(x, y))
+                .findFirst();
+
+        if(!handler.isPresent()){
+            return false;
+        } else {
+            return handler.get().handleClick(x, y, symbol);
+        }
     }
 
     public void draw(Graphics2D g) {
@@ -47,5 +52,5 @@ public class BoardDrawer {
         g.fillRect(twoThirdsPosition, 0, LINE_WIDTH, size);
         g.fillRect(0, oneThirdPosition, size, LINE_WIDTH);
         g.fillRect(0, twoThirdsPosition, size, LINE_WIDTH);
-    
+    }
 }

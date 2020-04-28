@@ -27,7 +27,7 @@ public class Board{
     public char isWon() {
         for (int y = 0; y < spaces.length; y++) {
             for (int x = 0; x < spaces[0].length; x++) {
-                wonBoards[y][x] = spaces[y][x].isWon();
+                wonBoards[y][x] = spaces[y][x].isWon().getWinner();
             }
         }
         return isWonButForChars();

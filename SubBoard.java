@@ -1,3 +1,11 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import util.Pair;
+
 /**
  * Class for smaller tic tac toe boards
  * 
@@ -6,6 +14,7 @@
  */
 public class SubBoard {
     public char[][] spaces = new char[3][3];
+    private char columnWinner;
 
     public SubBoard() {
         for (int y = 0; y < spaces.length; y++) {
@@ -34,57 +43,66 @@ public class SubBoard {
         }
     }
 
-    public char isWon() {
+    public WinningLine isWon() {
         for (int y = 0; y < spaces.length; y++) {
-            if (checkRow(y) != ' ') {
-                return checkRow(y);
+            char rowWinner = checkRow(y);
+            if (rowWinner != ' ') {
+                Line line;
+                switch (y) {
+                    case 0: line = Line.HORZ_TOP; break;
+                    case 1: line = Line.HORZ_CENTER; break;
+                    case 2: line = Line.HORZ_BOTTOM; break;
+                    default: line = Line.NONE; break; // should never be called
+                }
+                return new WinningLine(line, rowWinner);
             }
         }
         for (int x = 0; x < spaces[0].length; x++) {
-            if (checkColumn(x) != ' ') {
-                return checkColumn(x);
+            columnWinner = checkColumn(x);
+            if (columnWinner != ' ') {
+                Line line;
+                switch (x) {
+                    case 0: line = Line.VERT_LEFT; break;
+                    case 1: line = Line.VERT_CENTER; break;
+                    case 2: line = Line.VERT_RIGHT; break;
+                    default: line = Line.NONE; break; // should never be called
+                }
+                return new WinningLine(line, columnWinner);
             }
         }
         if(spaces[0][0] == spaces[1][1] && spaces[1][1] == spaces[2][2]){
             if(spaces[0][0] != ' '){
-                return spaces[0][0];
+                return new WinningLine(Line.DIAG_135, spaces[0][0]);
             }
         }
         if(spaces[2][0] == spaces[1][1] && spaces[1][1] == spaces[0][2]){
             if(spaces[2][0] != ' '){
-                return spaces[2][0];
+                return new WinningLine(Line.DIAG_45, spaces[2][0]);
             }
         }
         
-        return ' ';
+        return new WinningLine(Line.NONE, ' ');
     }
 
     private char checkRow(int y) {
         char[] possibilities = { 'x', 'o' };
-        char won = ' ';
         for (char possibility : possibilities) {
-            for (char space : spaces[y]) {
-                if (space != possibility) {
-                    break;
-                }
-                won = possibility;
+            if(String.valueOf(spaces[y]).chars().allMatch(i -> (char)i == possibility)){
+                return possibility;
             }
         }
-        return won;
+        return ' ';
     }
 
     private char checkColumn(int x) {
         char[] possibilities = { 'x', 'o' };
-        char won = ' ';
+        List<Character> column = Arrays.stream(spaces).map(a -> a[x]).collect(Collectors.toList());
         for (char possibility : possibilities) {
-            for (int y = 0; y < spaces.length; y++) {
-                if (spaces[y][x] != possibility) {
-                    break;
-                }
-                won = possibility;
+            if(column.stream().allMatch(c -> c == possibility)){
+                return possibility;
             }
         }
-        return won;
+        return ' ';
     }
     
 }

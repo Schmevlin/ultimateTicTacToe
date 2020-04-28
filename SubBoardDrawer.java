@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+import util.Pair;
+
 class SubBoardDrawer {
 
     private static int LINE_WIDTH = 5;
@@ -20,10 +22,10 @@ class SubBoardDrawer {
 
     public boolean canHandleClick(int clickX, int clickY) {
 
-        return x < clickX && clickX < (x + size) && 0 < clickY && clickY < (y + size);
+        return x < clickX && clickX < (x + size) && y < clickY && clickY < (y + size);
     }
 
-    public void handleClick(int x, int y, char symbol) {
+    public boolean handleClick(int x, int y, char symbol) {
         if (!canHandleClick(x, y)) {
             throw new Error("Wrong SubBoard picked to handle click");
         }
@@ -33,12 +35,17 @@ class SubBoardDrawer {
         System.out.println("relativeX = " + relativeX + "relativeY = " + relativeY + ", spaceLength = " + spaceLength);
         int row = relativeY / spaceLength;
         int col = relativeX / spaceLength;
+        if(subBoard.getSpace(col, row) != ' '){
+            return false;
+        }
         subBoard.setSpace(col, row, symbol);
+        return true;
     }
 
     public void draw(Graphics2D g) {
         drawBoard(g);
         drawSpaces(g);
+        drawWinningLine(g);
     }
 
     private void drawBoard(Graphics2D g) {
@@ -71,13 +78,41 @@ class SubBoardDrawer {
         Rectangle2D fontRect = g.getFontMetrics().getStringBounds(String.valueOf(space), g);
         int x = (int) (this.x + (col * spaceLength) + spaceLength / 2  + PADDING - fontRect.getWidth() / 2);
         int y = (int) (this.y + (row * spaceLength) + spaceLength / 2 + PADDING + fontRect.getHeight() / 4);
-        System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
+        //System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
         g.drawString(String.valueOf(space), x, y);
     }
 
     private void drawWinningLine(Graphics2D g){
-        if(subBoard.isWon() != ' '){
-            
+        
+        if(subBoard.isWon().hasWinner()){
+            WinningLine wl = subBoard.isWon();
+            Pair<Integer, Integer> coord1;
+            Pair<Integer, Integer> coord2;
+            switch(wl.getLine()){
+                case VERT_LEFT: coord1 = new Pair<>(0, 0); coord2 = new Pair<>(0, 2); break;
+                case VERT_CENTER: coord1 = new Pair<>(1, 0); coord2 = new Pair<>(1, 2); break;
+                case VERT_RIGHT: coord1 = new Pair<>(2, 0); coord2 = new Pair<>(2, 2); break;
+                case HORZ_TOP: coord1 = new Pair<>(0, 0); coord2 = new Pair<>(2, 0); break;
+                case HORZ_CENTER: coord1 = new Pair<>(0, 1); coord2 = new Pair<>(2, 1); break;
+                case HORZ_BOTTOM: coord1 = new Pair<>(0, 2); coord2 = new Pair<>(2, 2); break;
+                case DIAG_45: coord1 = new Pair<>(0, 2); coord2 = new Pair<>(2, 0); break;
+                case DIAG_135: coord1 = new Pair<>(0, 0); coord2 = new Pair<>(2, 2); break;
+                case NONE: return;
+                default: return;
+            }
+            int lineLength = size - PADDING * 2;
+            Pair<Integer, Integer> mapped1 = new Pair<>(
+                x + PADDING + coord1.first * (lineLength/3) + lineLength/6,
+                y + PADDING + coord1.second * (lineLength/3) + lineLength/6
+            );
+
+            Pair<Integer, Integer> mapped2 = new Pair<>(
+                x + PADDING + coord2.first * (lineLength/3) + lineLength/6,
+                y + PADDING + coord2.second * (lineLength/3) + lineLength/6
+            );
+            g.setColor(wl.getWinner() == 'x' ? Color.BLUE : Color.RED);
+            System.out.println("showing winning line");
+            g.drawLine(mapped1.first, mapped1.second, mapped2.first, mapped2.second);
         }
     }
 }

@@ -5,6 +5,7 @@ import javax.swing.event.MouseInputListener;
 import java.awt.*;
 
 public class GameWindow extends JPanel implements MouseInputListener {
+    private char currentPlayer = 'x';
     private BoardDrawer boardDrawer;
 
     public GameWindow(int size, Board board) {
@@ -24,7 +25,10 @@ public class GameWindow extends JPanel implements MouseInputListener {
     public void mouseReleased(MouseEvent e) {
         System.out.println("mouseX : " + e.getX());
         System.out.println("mouseY : " + e.getY());
-        boardDrawer.handleClick(e.getX(), e.getY(), 'x');
+        boolean handled = boardDrawer.handleClick(e.getX(), e.getY(), currentPlayer);
+        if(handled){
+            currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
+        }
         removeAll();
         revalidate();
         repaint();

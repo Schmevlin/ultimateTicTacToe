@@ -1,5 +1,5 @@
 
-public enum WinningLines {
+public enum Line {
     HORZ_TOP,
     HORZ_CENTER,
     HORZ_BOTTOM,
@@ -7,5 +7,6 @@ public enum WinningLines {
     VERT_CENTER,
     VERT_RIGHT,
     DIAG_45,
-    DIAG_135
+    DIAG_135,
+    NONE
 }
