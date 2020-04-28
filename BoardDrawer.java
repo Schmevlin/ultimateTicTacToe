@@ -5,7 +5,7 @@ import java.util.Optional;
 public class BoardDrawer {
     private static int LINE_WIDTH = 10;
 
-    private Board board;
+    public Board board;
     private int size;
     private ArrayList<SubBoardDrawer> subBoardDrawers = new ArrayList<>();
 
@@ -25,6 +25,10 @@ public class BoardDrawer {
     }
 
     public boolean handleClick(int x, int y, char symbol) {
+        if(board.isWon() != ' '){
+            return false;
+        }
+
         Optional<SubBoardDrawer> handler = subBoardDrawers.stream()
                 .filter(d -> !d.subBoard.isWon().hasWinner() && d.canHandleClick(x, y))
                 .findFirst();

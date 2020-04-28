@@ -23,20 +23,24 @@ public class GameWindow extends JPanel implements MouseInputListener {
         paintInfo(g2d);
     }
 
-    private void paintInfo(Graphics2D g){
+    private void paintInfo(Graphics2D g) {
         g.setColor(Color.BLACK);
-        String current = "Current Player: " + String.valueOf(currentPlayer).toUpperCase();
-        int stringHeight = (int) g.getFontMetrics().getStringBounds(current, g).getHeight();
-        g.drawString(current, 16, boardSize + 50 + stringHeight/2);
+        String display;
+        if (boardDrawer.board.isWon() == ' ') {
+            display = "Current Player: " + String.valueOf(currentPlayer).toUpperCase();
+        } else {
+            display = "Player " + String.valueOf(boardDrawer.board.isWon()).toUpperCase() + " is the winner!";
+        }
+        int stringHeight = (int) g.getFontMetrics().getStringBounds(display, g).getHeight();
+        g.drawString(display, 16, boardSize + 50 + stringHeight / 2);
     }
-
 
     @Override
     public void mouseReleased(MouseEvent e) {
         System.out.println("mouseX : " + e.getX());
         System.out.println("mouseY : " + e.getY());
         boolean handled = boardDrawer.handleClick(e.getX(), e.getY(), currentPlayer);
-        if(handled){
+        if (handled) {
             currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
         }
         removeAll();
@@ -44,10 +48,27 @@ public class GameWindow extends JPanel implements MouseInputListener {
         repaint();
     }
 
-    @Override public void mouseClicked(MouseEvent e) {}
-    @Override public void mousePressed(MouseEvent e) {}
-    @Override public void mouseEntered(MouseEvent e) {}
-    @Override public void mouseExited(MouseEvent e) {}
-    @Override public void mouseDragged(MouseEvent e) {}
-    @Override public void mouseMoved(MouseEvent e) {}
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+    }
 }

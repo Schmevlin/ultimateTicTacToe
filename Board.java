@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 
 /**
@@ -60,30 +63,23 @@ public class Board{
 
     private char checkRow(int y) {
         char[] possibilities = { 'x', 'o' };
-        char won = ' ';
         for (char possibility : possibilities) {
-            for (char space : wonBoards[y]) {
-                if (space != possibility) {
-                    break;
-                }
-                won = possibility;
+            if(String.valueOf(wonBoards[y]).chars().allMatch(i -> (char)i == possibility)){
+                return possibility;
             }
         }
-        return won;
+        return ' ';
     }
 
     private char checkColumn(int x) {
         char[] possibilities = { 'x', 'o' };
-        char won = ' ';
+        List<Character> column = Arrays.stream(wonBoards).map(a -> a[x]).collect(Collectors.toList());
         for (char possibility : possibilities) {
-            for (int y = 0; y < wonBoards.length; y++) {
-                if (wonBoards[y][x] != possibility) {
-                    break;
-                }
-                won = possibility;
+            if(column.stream().allMatch(c -> c == possibility)){
+                return possibility;
             }
         }
-        return won;
+        return ' ';
     }
 
 
