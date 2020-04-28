@@ -74,4 +74,10 @@ class SubBoardDrawer {
         System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
         g.drawString(String.valueOf(space), x, y);
     }
+
+    private void drawWinningLine(Graphics2D g){
+        if(subBoard.isWon() != ' '){
+            
+        }
+    }
 }
