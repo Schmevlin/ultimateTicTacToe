@@ -7,18 +7,28 @@ import java.awt.*;
 public class GameWindow extends JPanel implements MouseInputListener {
     private char currentPlayer = 'x';
     private BoardDrawer boardDrawer;
+    private int boardSize;
 
-    public GameWindow(int size, Board board) {
-        this.boardDrawer = new BoardDrawer(board, size);
+    public GameWindow(int boardSize, Board board) {
+        this.boardDrawer = new BoardDrawer(board, boardSize);
+        this.boardSize = boardSize;
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setFont(new Font("Helvetica", Font.BOLD, 48));
         boardDrawer.draw(g2d);
+        paintInfo(g2d);
     }
 
+    private void paintInfo(Graphics2D g){
+        g.setColor(Color.BLACK);
+        String current = "Current Player: " + String.valueOf(currentPlayer).toUpperCase();
+        int stringHeight = (int) g.getFontMetrics().getStringBounds(current, g).getHeight();
+        g.drawString(current, 16, boardSize + 50 + stringHeight/2);
+    }
 
 
     @Override

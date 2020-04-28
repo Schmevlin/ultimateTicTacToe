@@ -18,7 +18,7 @@ public class Main {
         JFrame frame = new JFrame();
         GameWindow window = new GameWindow(SIZE, board);
         frame.add(window);
-        frame.setSize(new Dimension(SIZE + 20, SIZE + 50));
+        frame.setSize(new Dimension(SIZE + 20, SIZE + 100 + 50));
         frame.setTitle("Ultimate Tic Tac Toe");
         frame.setVisible(true);
         window.addMouseListener(window);
