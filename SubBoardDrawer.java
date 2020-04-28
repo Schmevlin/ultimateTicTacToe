@@ -14,10 +14,9 @@ class SubBoardDrawer{
         this.size = size;
     }
 
-    public boolean canHandleClick(int x, int y){
-        int relativeX = x - this.x;
-        int relativeY = y - this.y;
-        return 0 < relativeX || relativeX < size || 0 < relativeY || relativeY < size;
+    public boolean canHandleClick(int clickX, int clickY){
+        
+        return x < clickX && clickX < (x + size)  && 0 < clickY && clickY < (y+size);
     }
 
     public void handleClick(int x, int y, char symbol){
@@ -26,8 +25,10 @@ class SubBoardDrawer{
         }
         int relativeX = x - this.x;
         int relativeY = y - this.y;
-        int row = relativeY / (size/3);
-        int col = relativeX / (size/3);
+        int spaceLength = (size/3);
+        System.out.println("relativeX = " + relativeX + "relativeY = " + relativeY + ", spaceLength = " + spaceLength);
+        int row = relativeY / spaceLength;
+        int col = relativeX / spaceLength;
         subBoard.setSpace(col, row, symbol); 
     }
 
@@ -43,8 +44,8 @@ class SubBoardDrawer{
     private void drawSpace(Graphics2D g, int row, int col, char space){ 
         int spaceLength = size / 3;
         Rectangle2D fontRect = g.getFontMetrics().getStringBounds(String.valueOf(space), g);
-        int x = (int) (this.x + (row * spaceLength) + spaceLength/2 - fontRect.getWidth()/2);
-        int y = (int) (this.y + (col * spaceLength) + spaceLength/2 + fontRect.getHeight()/2);
+        int x = (int) (this.x + (col * spaceLength) + spaceLength/2 - fontRect.getWidth()/2);
+        int y = (int) (this.y + (row * spaceLength) + spaceLength/2 + fontRect.getHeight()/2);
         System.out.println("drawing " + space + " at x = " + x + ", y = " + y);
         g.drawString(String.valueOf(space), x, y);
     }

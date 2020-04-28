@@ -1,7 +1,5 @@
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
-import javax.swing.event.MouseInputListener;
 
 /**
  * Class for outer "ultimate" board
@@ -9,7 +7,7 @@ import javax.swing.event.MouseInputListener;
  * @version 4/27/20
  * @author Kevin Harris
  */
-public class Board implements MouseInputListener{
+public class Board{
     public SubBoard[][] spaces = new SubBoard[3][3];
     private char[][] wonBoards = new char[3][3];
 
@@ -88,28 +86,5 @@ public class Board implements MouseInputListener{
         return won;
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {}
 
-    @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println("mouseX : " + e.getX());
-        System.out.println("mouseY : " + e.getY());
-        System.out.println();
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
-
-    @Override
-    public void mouseDragged(MouseEvent e) {}
-
-    @Override
-    public void mouseMoved(MouseEvent e) {}
 }

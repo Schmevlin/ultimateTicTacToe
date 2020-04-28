@@ -9,8 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
         Board board = new Board();
-        board.play(1, 1, 1, 1, 'x');
-        board.play(1, 1, 1, 0, 'o');
         System.out.println("Space = " + board.spaces[1][1].getSpace(0, 0));
         createWindow(board);
 
@@ -20,10 +18,10 @@ public class Main {
         JFrame frame = new JFrame();
         GameWindow window = new GameWindow(SIZE, board);
         frame.add(window);
-        frame.setSize(new Dimension(SIZE, SIZE));
+        frame.setSize(new Dimension(SIZE + 20, SIZE + 50));
         frame.setTitle("Ultimate Tic Tac Toe");
         frame.setVisible(true);
-        window.addMouseListener(board);
+        window.addMouseListener(window);
         frame.addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e) {

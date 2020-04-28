@@ -15,6 +15,7 @@ public class BoardDrawer {
                 int x = row * (size / 3);
                 int y = col * (size / 3);
                 SubBoardDrawer drawer = new SubBoardDrawer(subBoard, x, y, size / 3);
+                System.out.println("creating drawer at x = " + x + ", y = " + y);
                 subBoardDrawers.add(drawer);
             }
         }
