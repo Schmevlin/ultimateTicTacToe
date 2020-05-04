@@ -9,13 +9,20 @@ import util.Pair;
 /**
  * Class for smaller tic tac toe boards
  * 
- * @version 4/27/20
- * @author Kevin Harris
+ * @version 5/4/20
+ * @author Kevin Harris and Andy Burris
  */
 public class SubBoard {
+    /**
+     * array of spaces in a subboard
+     */
     public char[][] spaces = new char[3][3];
     private char columnWinner;
 
+    /**
+     * creates a new blank subboard
+     * @author Kevin Harris
+     */
     public SubBoard() {
         for (int y = 0; y < spaces.length; y++) {
             for (int x = 0; x < spaces[0].length; x++) {
@@ -29,11 +36,19 @@ public class SubBoard {
      * 
      * @param x x position of requested space
      * @param y y position of requested space
+     * @author Kevin Harris
      */
     public char getSpace(int x, int y) {
         return spaces[y][x];
     }
 
+    /**
+     * updates a space in a subboard
+     * @param x x pos to change
+     * @param y y pos to change
+     * @param symbol character to put in space
+     * @return whether or not it is a legal play
+     */
     public boolean setSpace(int x, int y, char symbol) {
         if (getSpace(x, y) != ' ') {
             return false;
@@ -43,6 +58,11 @@ public class SubBoard {
         }
     }
 
+    /**
+     * finds a line that wins the game 
+     * @return the line that won the game or a blank line
+     * @author Kevin Harris and Andy Burris
+     */
     public WinningLine isWon() {
         for (int y = 0; y < spaces.length; y++) {
             char rowWinner = checkRow(y);

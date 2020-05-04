@@ -7,13 +7,19 @@ import java.util.stream.Collectors;
 /**
  * Class for outer "ultimate" board
  * 
- * @version 4/27/20
- * @author Kevin Harris
+ * @version 5/4/20
+ * @author Kevin Harris and Andy Burris
  */
 public class Board{
+    /**
+     * the list of smaller boards
+     */
     public SubBoard[][] spaces = new SubBoard[3][3];
     private char[][] wonBoards = new char[3][3];
-
+    /**
+     * creates a board with empty spaces
+     * @author Kevin Harris
+     */
     public Board() {
         for (int y = 0; y < spaces.length; y++) {
             for (int x = 0; x < spaces[0].length; x++) {
@@ -22,11 +28,25 @@ public class Board{
             }
         }
     }
-
+    /**
+     * changes one space in one subboard
+     * @param xOuter x pos of subboard
+     * @param yOuter y pos of subboard
+     * @param xInner x pos of location on subboard
+     * @param yInner y pos of location on subboard
+     * @param symbol what to play in the space
+     * @return whether or not it was a legal play
+     * @author Kevin Harris and Andy Burris
+     */
     public boolean play(int xOuter, int yOuter, int xInner, int yInner, char symbol) {
         return spaces[yOuter][xOuter].setSpace(xInner, yInner, symbol);
     }
-
+    /**
+     * function to tell if the game is won by updating the list of 
+     * won boards then checking if that list has a winning row/column/diagonal
+     * @return which letter won the game
+     * @author Kevin Harris and Andy Burris
+     */
     public char isWon() {
         for (int y = 0; y < spaces.length; y++) {
             for (int x = 0; x < spaces[0].length; x++) {
