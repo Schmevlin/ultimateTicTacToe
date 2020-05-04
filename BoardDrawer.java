@@ -2,6 +2,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Class that handles drawing of the ultimate tic-tac-toe board
+ * @author Andy Burris and Kevin Harris
+ * @version 4 May 2020
+ */
 public class BoardDrawer {
     private static int LINE_WIDTH = 10;
 
@@ -24,6 +29,13 @@ public class BoardDrawer {
         }
     }
 
+    /**
+     * Method to handle click on the board, delegate it to the click handler in the correct SubBoardDrawer
+     * @param x absolute x position of mouse click
+     * @param y absolute y position of mouse click
+     * @param symbol char representing player who clicked (either 'x' or 'o')
+     * @return true if click was successfully handled, false otherwise(e.g. if click was on an already filled square or board)
+     */
     public boolean handleClick(int x, int y, char symbol) {
         if(board.isWon() != ' '){
             return false;
@@ -40,12 +52,19 @@ public class BoardDrawer {
         }
     }
 
+    /**
+     * Method that handles drawing of board, and draws all subboards through their respective drawers.
+     * @param g Graphics2D context to draw on
+     */
     public void draw(Graphics2D g) {
-        // TODO: game winners
         drawBoard(g);
         subBoardDrawers.forEach(d -> d.draw(g));
     }
 
+    /**
+     * Method that draws lines of ultimate tic-tac-toe board
+     * @param g Graphics2D context to draw on
+     */
     private void drawBoard(Graphics2D g) {
         g.setColor(Color.GRAY);
         int lineOffset = (LINE_WIDTH * 2 / 3);

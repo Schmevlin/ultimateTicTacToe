@@ -18,9 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Board board = new Board();
-        System.out.println("Space = " + board.spaces[1][1].getSpace(0, 0));
         createWindow(board);
-
     }
     /**
      * Creates window and listeners for user input
